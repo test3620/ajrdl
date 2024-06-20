@@ -1,0 +1,116 @@
+<!-- ======= EXTENTION DE BASE ======= -->
+{% extends "base.html" %}
+
+<!-- ======= TOP DE PAGE ======= -->
+{% block top %}{% include "top.html" %}{% endblock %}
+
+<!-- ======= TÊTE DE PAGE ======= -->
+{% block header %}{% include "header.html" %}{% endblock %}
+
+<!-- ======= CONTENU DE PAGE ======= -->
+{% block body %}
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <h2>Actualité</h2>
+                <ol>
+                    <li><a href="{% url "accueil" %}">Accueil</a></li>
+                    <li>Actualité</li>
+                </ol>
+            </div>
+        </div>
+    </section><!-- End Breadcrumbs -->
+
+    <!-- ======= Blog Section ======= -->
+    <section id="blog" class="blog">
+        <div class="container" data-aos="fade-up">
+            <div class="row">
+                <div class="col-lg-8 entries">
+                    {% for actualite in actualite %}
+                        <article class="entry">
+                            <div class="entry-img">
+                                <img src="{{ actualite.image.url }}" alt="Image" class="img-fluid">
+                            </div>
+                            
+                            <h2 class="entry-title">
+                                <a href="blog-single.html">{{ actualite.titre }}</a>
+                            </h2>
+
+                            <div class="entry-meta">
+                                <ul>
+                                    <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-single.html">{{ actualite.auteur.last_name }} {{ actualite.auteur.first_name }}</a></li>
+                                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-single.html"><time datetime="2020-01-01">{{ actualite.date }}</time></a></li>
+                                    <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-single.html">12 Comments</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="entry-content">
+                                <p>{{ actualite.contenu|truncatewords:30 }}</p>
+                                <div class="read-more">
+                                    <a href="{% url "detail" actualite.id %}">Plus d'info</a>
+                                </div>
+                            </div>
+                        </article><!-- Fin article d'actualité -->
+                    {% endfor %}  
+                
+                    <div class="blog-pagination">
+                        <ul class="justify-content-center">
+                            <li class="active"><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                        </ul>
+                    </div>
+                </div><!-- Fin blog entries list -->
+
+                <div class="col-lg-4">
+                    <div class="sidebar">
+                        <h3 class="sidebar-title">Recherche</h3>
+                        <div class="sidebar-item search-form">
+                            <form action="">
+                                <input type="text">
+                                <button type="submit"><i class="bi bi-search"></i></button>
+                            </form>
+                        </div><!-- Fin sidebar recherche formn -->
+
+                        <h3 class="sidebar-title">Catégories</h3>
+                        <div class="sidebar-item categories">
+                            <ul>
+                                <li><a href="#">Réunion <span>(25)</span></a></li>
+                                <li><a href="#">Naissance <span>(12)</span></a></li>
+                                <li><a href="#">Réjouissance <span>(5)</span></a></li>
+                                <li><a href="#">Don <span>(22)</span></a></li>
+                                <li><a href="#">Décès <span>(8)</span></a></li>
+                            </ul>
+                        </div><!-- Fin sidebar catégories -->
+
+                        <h3 class="sidebar-title">Articles les plus récents</h3>
+                        <div class="sidebar-item recent-posts">
+                            {% for derniers in derniers_articles %}
+                                <div class="post-item clearfix">
+                                    <img src="{{ derniers.image.url }}" alt="">
+                                    <h4><a href="blog-single.html">{{ derniers.titre }}</a></h4>
+                                    <time datetime="2020-01-01">{{ derniers.date }}</time>
+                                </div>
+                            {% endfor %}  
+                        </div><!-- End sidebar articles recents-->
+
+                        <h3 class="sidebar-title">Mots clés</h3>
+                        <div class="sidebar-item tags">
+                            <ul>
+                                <li><a href="#">Réunion</a></li>
+                                <li><a href="#">Naissance</a></li>
+                                <li><a href="#">Réjouissance</a></li>
+                                <li><a href="#">Don</a></li>
+                                <li><a href="#">Décès</a></li>
+                            </ul>
+                        </div><!-- End sidebar tags -->
+                    </div><!-- End sidebar -->
+                </div><!-- End blog sidebar -->
+            </div>
+        </div>
+    </section><!-- End Blog Section -->
+{% endblock %}
+
+<!-- ======= PIED DE PAGE ======= -->
+{% block footer %}{% include "footer.html" %}{% endblock %}

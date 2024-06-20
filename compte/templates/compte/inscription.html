@@ -1,0 +1,137 @@
+<!-- === ETENDU DE 'base.html' ===-->
+{% extends "compte/base.html" %}
+
+<!-- === TITRE D'ONGLET DE PAGE ===-->
+{% block titre %}Page d'inscription{% endblock %}
+
+<!-- CONTENU DE LA PAGE -->
+{% block body_membre %}
+   {% load static %}
+    <div class="container">
+
+        <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+
+                        <div class="d-flex justify-content-center py-4">
+                            <a href="{% url "accueil" %}" class="logo d-flex align-items-center w-auto">
+                                <img src="{% static "compte/assets/img/image1.png" %}" alt="">
+                                <span class="d-none d-lg-block"></span>
+                            </a>
+                        </div><!-- End Logo -->
+
+                        <div class="card mb-3">
+
+                            <div class="card-body">
+
+                                <div class="pt-4 pb-2">
+                                    <h5 class="card-title text-center pb-0 fs-4">Devenir membre</h5>
+                                    <p class="text-center small">Entrez vos informations personnelles</p>
+                                </div>
+
+                                <form method="post" action="" class="row g-3 needs-validation" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    
+                                    <!-- EMAIL -->
+                                    <div class="col-12">
+                                        {{ form.email }}
+                                        <div class="invalid-feedback">S’il vous plaît entrer une adresse e-mail valide !</div>
+                                    </div>
+
+                                    <!-- NOM -->
+                                    <div class="col-6">                          
+                                        {{ form.last_name }}
+                                        <div class="invalid-feedback">S’il vous plaît, entrez votre nom !</div>
+                                    </div>
+
+                                    <!-- PRÉNOM -->
+                                    <div class="col-6">
+                                        {{ form.first_name }}
+                                        <div class="invalid-feedback">S’il vous plaît, entrez votre prénom !</div>
+                                    </div>
+
+                                    <!-- PROFESSION -->
+                                    <div class="col-12">
+                                        {{ form.profession }}
+                                        <div class="invalid-feedback">S’il vous plaît entrer une adresse e-mail valide !</div>
+                                    </div>
+
+                                    <!-- VILLE DE RÉSIDENCE -->
+                                    <div class="col-6">
+                                        {{ form.ville }}
+                                        <div class="invalid-feedback">S’il vous plaît entrer votre ville de résidence !</div>
+                                    </div>
+
+                                    <!-- QUARTIER -->
+                                    <div class="col-6">
+                                        {{ form.quartier }}
+                                        <div class="invalid-feedback">S’il vous plaît entrer votre quartier !</div>
+                                    </div>
+                                
+                                    <!-- CONTACT -->
+                                    <label for="contact" class="form-label">Numéro de téléphone :</label>
+                                    <div class="d-flex mt-0 ">    
+                                        {{ form.contact }}                   
+                                        <div class="invalid-feedback">S’il vous plaît, entrez votre contact !</div>
+                                    </div>
+
+                                    <!-- DATE DE NAISSANCE -->
+                                    <label for="naissance" class="form-label">Date de naissance :</label>
+                                    <div class="col-12 d-flex mt-0">
+                                        {{ form.naissance }}
+                                        <div class="invalid-feedback">S’il vous plaît entrer votre de naissance !</div>
+                                    </div>
+
+                                    <!-- PHOTO D'IDENTITÉ -->
+                                    <label for="photo" class="form-label">Photo d'identité :</label>
+                                    <div class="col-12 d-flex mt-0">
+                                        {{ form.photo }}
+                                        <div class="invalid-feedback">S’il vous plaît entrer photo d'identité !</div>
+                                    </div>
+
+                                    <!-- PASSWORD_1 -->
+                                    <div class="col-6">                          
+                                        {{ form.password1 }}
+                                        <div class="invalid-feedback">S’il vous plaît, entrez votre nom !</div>
+                                    </div>
+
+                                    <!-- PASSWORD_2 -->
+                                    <div class="col-6">
+                                        {{ form.password2 }}
+                                        <div class="invalid-feedback">S’il vous plaît, entrez votre prénom ! {{ form.error }}</div>
+
+                                    </div>
+
+                                    <div>{{ form.errors }}</div>
+
+                                    <div class="col-12">
+                                            <div class="form-check">
+                                                <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required>
+                                                <label class="form-check-label" for="acceptTerms">J'accepte les <a href="#">termes et conditions</a></label>
+                                                <div class="invalid-feedback">Vous devez être d’accord avant de soumettre.</div>
+                                            </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <button class="btn btn-primary w-100" type="submit">S'inscrire</button>
+                                    </div>
+                                    <div class="col-12">
+                                        <p class="small mb-0">Vous êtes déjà membre ? <a href="{% url "connecte" %}">Se connecter</a></p>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="credits">
+                            <!-- All the links in the footer should remain intact. -->
+                            <!-- You can delete the links only if you purchased the pro version. -->
+                            <!-- Licensing information: https://bootstrapmade.com/license/ -->
+                            <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+                            Conçu par <a href="#">ELECTRO Labo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}
